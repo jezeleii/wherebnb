@@ -10,9 +10,12 @@ export default async function getListings () {
             }
         });
 
-        return listings; 
-        //individual listing view was transformed to map (ISOString error)
-        //however this step is ommitted for the build since error is not present
+       const safeListings = listings.map((listing) => ({
+        ...listing, 
+        createdAt: listing.createdAt.toISOString(),
+       }));
+
+       return safeListings;
     } catch (error: any){
         throw new Error(error);
     }
