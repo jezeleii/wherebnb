@@ -9,8 +9,10 @@ import Modal from "./components/modals/Modal";
 import RentModal from "./components/modals/RentModal";
 import LoginModal from "./components/modals/LoginModal";
 import RegisterModal from "./components/modals/RegisterModal";
+
 import ToasterProvider from "./providers/ToasterProvider";
 import getCurrentUser from "./actions/getCurrentUser";
+import SearchModal from "./components/modals/SearchModal";
 
 //by default, layout is a server component
 
@@ -39,6 +41,7 @@ export default async function RootLayout({
         <ClientOnly>
         {/* <Modal actionLabel="Submit" secondaryActionLabel="secondary" title="Login Modal" isOpen/> */}
         <ToasterProvider/>
+        <SearchModal/>
         <RentModal/>
         <LoginModal/>
         <RegisterModal/>

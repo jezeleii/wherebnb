@@ -2,15 +2,19 @@
 import ClientOnly from "./components/ClientOnly";
 import Container from "./components/Container";
 import EmptyState from "./components/EmptyState";
-import getListings from "./actions/getListings";
+import getListings, { IListingsParams } from "./actions/getListings";
+
 import getCurrentUser from "./actions/getCurrentUser";
 import ListingCard from "./components/listings/ListingCard";
+import ErrorState from "./error";
 
-
+interface HomeProps {
+  searchParams: IListingsParams
+}
 // since home is a server component, we can call from the database directly
 // do not need to create an api call for that 
-export default async function Home() {
-  const listings = await getListings(); 
+const Home = async ({ searchParams }: HomeProps) => {
+  const listings = await getListings(searchParams); 
   const currentUser = await getCurrentUser(); 
 
   if (listings.length === 0){
@@ -20,6 +24,7 @@ export default async function Home() {
       </ClientOnly>
     )
   }
+  
   return (
     <ClientOnly>
       <Container>
@@ -48,3 +53,5 @@ export default async function Home() {
     </ClientOnly>
   );
 }
+
+export default Home; 
